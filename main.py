@@ -13,31 +13,31 @@ class try_toconnect():
         wb = openpyxl.load_workbook('./DataBase.xlsx')
         my_sheet = wb.active
     except:
-        print('Неудалось подключиться к БД')
+        print('Failed to connect to the DB')
         time.sleep(5)
         sys.exit()
 def main():
-    print ('Сортировка таблицы: 1. По убыванию\n2. По возрастанию\n3. Нынешняя база данных\n4. Количество значений\n5. Имя по алфавиту\n6. Сначала...\n7. Назад')
-    value = int(input("Введите значение: "))
+    print ('Sorting the table: 1. Descending\n2. Ascending\n3. The current database\n4. The number of values \n5. Alphabetical name\n6. At first...\n7. Back')
+    value = int(input("Enter value: "))
     if value == 1:
-        print('Сортировка как?\n1. По году вступления \n2. По убыванию возраста\n3. По убыванию возраста и года вступления\n4. Назад')
-        mind = int(input('Введите значение: '))
-        if mind == 1:
+        print('Sorting how?\n1. By the year of entry \n2. In descending order of age\n3. In descending order of age and year of entry\n4. Back')
+        sorting_dis = int(input('Enter value: '))
+        if sorting_dis == 1:
             print(df.sort_values(["Year_to_join"], ascending=False))
-        elif mind == 2:
+        elif sorting_dis == 2:
             print(df.sort_values(["Age"]), ascending=False)
-        elif mind == 3:
+        elif sorting_dis == 3:
             print(df.sort_values(["Age","Year_to_join"], ascending=[False, False]))
         else:
             return main()
     elif value == 2:
-        print("Сортировка как?\n1. По году вступления\n2. По возрастанию возраста\n3. По возрастанию возраста и года вступления\n4. Назад")
-        value1 = int(input('Введите значение: '))
-        if value1 == 1:
+        print("Sorting how?\n1. By the year of entry\n2. In ascending order of age\n3. In ascending order of age and year of entry\n4. Back")
+        sorting_asc = int(input('Enter value: '))
+        if sorting_asc == 1:
             print(df.sort_values(["Year_to_join"]))
-        elif value1 == 2:
+        elif sorting_asc == 2:
             print(df.sort_values(["Age"]))
-        elif value1 == 3:
+        elif sorting_asc == 3:
             print(df.sort_values(["Age","Year_to_join"]))
         else:
             return main()
@@ -45,8 +45,8 @@ def main():
         print(df)
         return main()
     elif value == 4:
-        print('1. Количество обладателей одного бренда смартфона\n2. Количество каких-либо одногорожан\n3. Количество людей одинакового пола\n4. Количество одногодок\n5. Количество обладателей одной OS\n6. Количество одногодок вступителей в беседу\n7. Количество людей схожей национальности\n8. Количество клиентов одного банка\n9. Назад')
-        value2 = int(input('Введите значение: '))
+        print('1. The number of owners of one smartphone brand\n2. The number of any single roads\n3. The number of people of the same sex\n4. The number of one-year-olds\n5. The number of owners of one OS\n6. The number of one-year-olds joining the conversation \n7. The number of people of similar nationality \n8. The number of clients of one bank\n9. Back')
+        value2 = int(input('Enter value: '))
         if value2 == 1:
             print(df["Brand of phone"].value_counts())
         elif value2 == 2:
@@ -66,8 +66,8 @@ def main():
         else:
             return main()
     elif value == 5:
-        print("1. От A до Z\n2. Oт Z до A\n3. Назад")
-        value3 = int(input("Введите значение: "))
+        print("1. From A to Z\n2. From Z to A\n3. Back")
+        value3 = int(input("Enter value: "))
         if value3 == 1:
             print(df.sort_values(["Name"]))
         elif value3 == 2:
@@ -77,11 +77,11 @@ def main():
 
     elif value == 6:
         def value6():
-            print("Сначала что:\n1. Сначала жители России/Казахстана\n2. Сначала Android/iOS\n3. Сначала высокие/низкие\n4. Назад")
-            num = int(input("Введите значение: "))
+            print("First what:\n1. First, the residents of Russia/Kazakhstan\n2. First Android/iOS\n3. First high/low\n4. Back")
+            num = int(input("Enter value: "))
             if num == 1:
-                print('1. Сначала жители России\n2. Сначала жители Казахстана')
-                numc = int(input("Введите значение: "))
+                print('1. First, the residents of Russia\n2. First, residents of Kazakhstan')
+                numc = int(input("Enter value: "))
                 if numc == 1:
                     print(df.sort_values(["Country"], ascending=False))
                 elif numc == 2:
@@ -89,8 +89,8 @@ def main():
                 else:
                     return value6()
             elif num == 2:
-                print('1. Сначала Android\n2. Сначала iOS\n3. Назад')
-                numo = int(input("Введите значение: "))
+                print('1. Android first\n2. First iOS\n3. Back')
+                numo = int(input("Enter value: "))
                 if numo == 1:
                     print(df.sort_values(["OS"]))
                 elif numo == 2:
@@ -98,8 +98,8 @@ def main():
                 else: 
                     return value6()
             elif num == 3:
-                print('1. Сначала высокие\n2. Сначала низкие\n3. Назад')
-                numh = int(input("Введите значение"))
+                print('1. First high \n2. First low\n3. Back')
+                numh = int(input("Enter value: "))
                 if numh == 1:
                     print(df.sort_values(["Height"]))
                 elif numh == 2:
@@ -113,34 +113,31 @@ def main():
         return
 
 def redactor():
-    print('Что вы хотите сделать?\n1.Редактирование/добавление данных\n2.Удаление строки\n3.Назад')
-    main = int(input("Введите значение: "))
+    print('What do you want to do?\n1.Editing/adding data\n2.Deleting the line \n3.Back')
+    main = int(input("Enter value: "))
     if main == 1:
         print (pd.read_excel("./DataBase.xlsx"))
-        data = []
-        index = []
         
-        Name = str(input('Введите имя и фамилию: '))
-        Age = int(input("Введите возраст: "))
-        City = str(input("Введите город: "))
-        Country = str(input("Введите страну: "))
-        Sex = str(input("Введите пол: "))
-        Height = int(input("Введите рост: "))
-        Grade = int(input("Введите школьный класс(если закончили школу введите 0): "))
-        OS = str(input("Введите свою операционную систему на телефоне(iOS/Android): "))
-        Brand_of_phone = str(input("Введите марку своего смартфона: "))
-        National = str(input("Введите свою национальность: "))
-        Birth = str(input("Введите дату своего рождения(пример: 01.01.2021): "))
-        Bank = str(input("Введите свой основной банк: "))
-        Year_to_join = int(input("Введите год, когда вы вступили в беседу(пример: 2020): "))
+        Name = str(input('Enter your first and last name: '))
+        Age = int(input("How old are you: "))
+        City = str(input("What's your city: "))
+        Country = str(input("What's your country: "))
+        Sex = str(input("What's your gendet: "))
+        Height = int(input("How much is your height: "))
+        Grade = int(input("Enter the school class (if you graduated from school, enter 0): "))
+        OS = str(input("Enter your operating system on your phone(iOS/Android): "))
+        Brand_of_phone = str(input("Enter the brand of your smartphone:"))
+        National = str(input("Enter your nationality:"))
+        Birth = str(input("Enter your date of birth(example: 01.01.2021):"))
+        Bank = str(input("Enter your main bank:"))
+        Year_to_join = int(input("Enter the year you entered the conversation (example: 2020):"))
 
 
-        inti = int(input("Укажите номер строки(В случае, если вы хотите отредактировать данные, просто укажите строку с существующими данными): "))
-        inti = inti + 2
+        dbredactor = int(input("Specify the line number (In case you want to edit the data, just specify the line with the existing data):")) + 2
 
-        print('Вы действительно хотите отредактировать строку ', inti-2, '\n1.Да\n2.Нет')
-        amogus = int(input("Введите значение: "))
-        if amogus == 1:
+        print('Do you really want to edit line', inti-2, '\n1.Yes\n2.No')
+        sure = int(input("Enter value: "))
+        if sure == 1:
             c1 = my_sheet.cell(row = inti, column = 1)
             c1.value = Name
             c2 = my_sheet.cell(row= inti, column = 2)
@@ -176,12 +173,11 @@ def redactor():
 
     elif main == 2:
         print(df)
-        a = int(input("Введите номер строки: "))
-        print('Вы уверены, что хотите удалить строку ',a,'?\n1.Да\n2.Нет')
-        mind = int(input('Введите значение:'))
-        if mind == 1:
-            a = a+2
-            my_sheet.delete_rows(a)
+        roww = int(input("Enter the row number:")) + 2
+        print('Are you sure you want to delete row ',roww,'?\n1.Yes\n2.No')
+        sure2 = int(input('Enter value: '))
+        if sure2 == 1:
+            my_sheet.delete_rows(roww)
             wb.save('./DataBase.xlsx')
 
             print(pd.read_excel('./DataBase.xlsx'))
@@ -195,14 +191,14 @@ class somain:
     wb = openpyxl.load_workbook('DataBase.xlsx')
     wb.save("./DataBase.xlsx")
     df = pd.read_excel('./DataBase.xlsx')
-    print('Добро пожаловать в консольный сортировщик и редактор БД и ДТ.\nЧто вы хотите сделать?\n1.Отсортировать\n2.Редактировать')
-    a = int(input("Введите значение: "))
+    print('Welcome to the console sorter and DB and DT editor.\What do you want to do?\n1.Sort \n2.Edit')
+    a = int(input("Enter value: "))
     if a==1:
         main()
     elif a==2:
         redactor()
     else:
-        print("Неверное значение")
+        print("Wrong value")
 
 while True:
     somain()
